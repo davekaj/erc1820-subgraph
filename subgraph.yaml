@@ -1,0 +1,29 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ERC1820
+    network: mainnet
+    source:
+      address: "0x1820a4b7618bde71dce8cdc73aab6c95905fad24"
+      abi: ERC1820
+      startBlock: 7496549
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - InterfaceImplementerSet
+        - ManagerChanged
+      abis:
+        - name: ERC1820
+          file: ./abis/ERC1820.json
+        - name: ERC777
+          file: ./abis/ERC777.json
+      eventHandlers:
+        - event: InterfaceImplementerSet(indexed address,indexed bytes32,indexed address)
+          handler: handleInterfaceImplementerSet
+        - event: ManagerChanged(indexed address,indexed address)
+          handler: handleManagerChanged
+      file: ./src/mapping.ts

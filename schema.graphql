@@ -1,0 +1,12 @@
+type Token @entity {
+  id: ID! # addr
+  name: String
+  symbol: String # address
+  totalSupply: BigInt! # bytes32
+  implementer: Bytes! # you must call name, symbol and totalSupply on implementer
+}
+
+type Total @entity {
+  id: ID!
+  count: Int
+}
